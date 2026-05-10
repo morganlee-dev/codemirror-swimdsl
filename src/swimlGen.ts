@@ -160,6 +160,10 @@ function writeSwimInstruction(
       writeInstructionModifier(parent, modifier);
     }
   }
+
+  if (instruction.instructionDescription !== undefined) {
+    parent.ele("instructionDescription").txt(instruction.instructionDescription.message);
+  }
 }
 
 /**

@@ -58,6 +58,7 @@ instruction {
 SwimInstruction {
     (Number repititionOperator)?
     (SingleInstruction | BlockInstruction) StrokeModifier? instructionModifier*
+    ("--" Message)?
 }
 
 SingleInstruction {

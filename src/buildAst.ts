@@ -384,6 +384,7 @@ function visitSwimInstruction(
   let strokeModifier = "default";
   let instruction: SingleInstruction | BlockInstruction;
   const instructionModifiers: InstructionModifier[] = [];
+  let instructionDescription: Message | undefined;
 
   // Move into either Number (for repetitions) or SingleInstruction |
   // BlockInstruction
@@ -432,7 +433,13 @@ function visitSwimInstruction(
     if (hasModifiers) {
       do {
         instructionModifiers.push(visitInstructionModifier(cursor, state));
-      } while (cursor.nextSibling());
+        hasModifiers = cursor.nextSibling();
+      } while (cursor.name !== "Message" && hasModifiers);
+    }
+
+    // Modifiers finished
+    if (cursor.name === "Message") {
+      instructionDescription = visitMessage(cursor, state);
     }
   }
 
@@ -445,6 +452,7 @@ function visitSwimInstruction(
     instruction,
     strokeModifier,
     instructionModifiers,
+    ...(instructionDescription !== undefined && { instructionDescription }),
   };
 }
 
