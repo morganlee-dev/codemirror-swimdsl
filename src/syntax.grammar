@@ -101,7 +101,7 @@ paceSpecification {
 }
 
 timeSpecification {
-    (onKeyword | restKeyword) Duration
+    (onKeyword | restKeyword | sinceKeyword) Duration
 }
 
 Duration {
@@ -124,6 +124,7 @@ messageSpecification {
     onKeyword             { "on" }
     underwaterKeyword     { "Underwater" }
     breatheKeyword        { "breathe" }
+    sinceKeyword          { "since" }
     space       { @whitespace+ }
     Comment     { "#" ![\n]* }
     Number      { @digit+ }
@@ -143,6 +144,7 @@ messageSpecification {
     @precedence { underwaterKeyword, identifier }
     @precedence { breatheKeyword, identifier }
     @precedence { restKeyword, identifier }
+    @precedence { sinceKeyword, identifier }
 }
 
 @skip { space | Comment }

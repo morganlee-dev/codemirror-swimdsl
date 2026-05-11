@@ -116,6 +116,11 @@ function writeInstructionModifier(
           .ele("rest")
           .ele("afterStop")
           .txt(xmlDuration(modifier.minutes, modifier.seconds));
+      } else if (modifier.keyWord === "since") {
+        xmlParent
+            .ele("rest")
+            .ele("sinceLastRest")
+            .txt(xmlDuration(modifier.minutes, modifier.seconds));
       } else {
         // 'on' restType used
         xmlParent
